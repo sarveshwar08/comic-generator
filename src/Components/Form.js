@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import html2canvas from 'html2canvas';
 
 const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
@@ -51,7 +51,7 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
 
         if (selectedIndex < 9) {
             // since we are asked to support only 10 images at maximum
-            if (selectedIndex == currentIndexOfImage.current) {
+            if (selectedIndex === currentIndexOfImage.current) {
                 const newIndex = currentIndexOfImage.current += 1;
                 setSelectedIndex(newIndex)
             } else {
@@ -65,9 +65,9 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
         // select the element containing the generated images
         const element = document.getElementById('generated-images'),
         // convert it to canvas for exporting
-            canvas = await html2canvas(element),
-            data = canvas.toDataURL('image/jpg'),
-            link = document.createElement('a');
+        canvas = await html2canvas(element),
+        data = canvas.toDataURL('image/jpg'),
+        link = document.createElement('a');
         link.href = data;
         link.download = 'downloaded-image.jpg';
         document.body.appendChild(link);
@@ -79,7 +79,7 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
         <div className='mx-auto px-4'>
 
             <div className='flex space-x-2 items-center'>
-                <h2 className='my-auto text-lg text-white'>Please enter your prompt for image</h2>
+                <p className='my-auto text-white text-lg'>Please enter your prompt for image</p>
                 <div className='my-auto'>
                     <select value={selectedIndex + 1} onChange={handleChange}>
                         {Array.from({ length: currentIndexOfImage.current + 1 }, (_, index) => (
@@ -111,7 +111,7 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
                     type="button"
                     onClick={handleDownloadClick}
                     className="border rounded bg-slate-950 border-white px-6 py-2 cursor-pointer text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={imageUrls.length < 1}
+                    disabled={imageUrls.length < 1 || isGenerating}
                 >
                     Export
                 </button>
