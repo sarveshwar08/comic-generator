@@ -76,8 +76,8 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
     };
 
     return (
-        <div className='mx-auto px-4'>
-
+    <div className='mx-auto px-4'>
+        <form onSubmit={handleSubmitClick}>
             <div className='flex space-x-2 items-center'>
                 <p className='my-auto text-white text-lg'>Please enter your prompt for image</p>
                 <div className='my-auto'>
@@ -100,7 +100,7 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
 
             <div className='flex space-x-4 items-center my-4 flex-wrap'>
                 <button
-                    type="button"
+                    type="submit"
                     onClick={handleSubmitClick}
                     className="border rounded bg-green-500 border-green-500 px-6 py-2 cursor-pointer text-white disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isGenerating || userInput === ''}
@@ -116,7 +116,12 @@ const Form = ({ imageUrls, setImageUrls, currentIndexOfImage }) => {
                     Export
                 </button>
             </div>
-        </div>
+            
+            <div className='flex text-white mt-6'>
+                <p>If you have any feedback, <a href='mailto:sarveshwar_p@me.iitr.ac.in' style={{color: 'blue'}}><i>reach us</i></a></p>
+            </div>
+        </form>
+    </div>
     );
 };
 
